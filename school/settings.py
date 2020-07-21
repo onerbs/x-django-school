@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
 	'rest_framework',
+	'rest_framework_swagger',
 	'courses.apps.CoursesConfig',
 	'students.apps.StudentsConfig',
 	'django.contrib.admin',
@@ -123,5 +124,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
-	'DEFAULT_PAGINATION_CLASS': 'core.pager.StandardResultsSetPagination'
+	# 'DEFAULT_PAGINATION_CLASS': 'core.pager.Default',
+	'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+	'DEFAULT_AUTHENTICATION_CLASSES': (
+		'rest_framework_simplejwt.authentication.JWTAuthentication',
+	),
+	'DEFAULT_PERMISSION_CLASSES': [
+		'rest_framework.permissions.IsAuthenticated'
+	]
 }
